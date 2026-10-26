@@ -1,0 +1,18 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>My IP</title>
+<p id="ip">Loading...</p>
+<script>
+fetch('/api/ip')
+  .then(r => {
+    if (!r.ok) throw new Error('Request failed');
+    return r.json();
+  })
+  .then(d => {
+    document.getElementById('ip').textContent = d.ip || 'IP unavailable';
+  })
+  .catch(() => {
+    document.getElementById('ip').textContent = 'Failed to load IP';
+  });
+</script>
